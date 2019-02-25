@@ -26,42 +26,19 @@ public class KnightBoard {
       board[row][col]=level;
     }
     if (level==row*col) return true;
-
     for (int i=row;i<board.length;i++) {
       for (int j=col;j<board[i].length;j++) {
-        System.out.println(Text.go(1,1));
-        System.out.println(this);Text.wait(200); //adjust this delay
-        if (row+2>0 && col+1<board[i].length) {
-          if (solveH(row+2,col+1,level+1)) return true;
-          clearLevels(level);
-        }
-        if (row+2>0 && col-1>0) {
-          if (solveH(row+2,col-1,level+1)) return true;
+        int[] moves = {2,1,2,-1,-2,1,-2,-1,1,2,1,-2,-1,2,-1,-2};
+        for (int k=0;k<moves.length;k+=2) {
+          System.out.println(Text.go(1,1));
+          System.out.println(this);Text.wait(50); //adjust this delay
+          if (i+k>=0 && j+k<board.length
+          && j+moves[k+1]>=0 && i+moves[k+1]<board[0].length) {
+            if (solveH(i+k,j+moves[k+1],level+1)) {
+              return true;
+            }
             clearLevels(level);
-        }
-        if (row-2>0 && col+1<board[i].length) {
-          if (solveH(row-2,col+1,level+1)) return true;
-          clearLevels(level);
-        }
-        if (row-2>0 && col-1>0) {
-          if (solveH(row-2,col-1,level+1)) return true;
-          clearLevels(level);
-        }
-        if (row+1>0 && col+2<board[i].length) {
-          if (solveH(row+1,col+2,level+1)) return true;
-          clearLevels(level);
-        }
-        if (row+1>0 && col-2>0) {
-          if (solveH(row+1,col-2,level+1)) return true;
-          clearLevels(level);
-        }
-        if (row-1>0 && col+2<board[i].length) {
-          if (solveH(row-1,col+2,level+1)) return true;
-          clearLevels(level);
-        }
-        if (row-1>0 && col-2>0) {
-          if (solveH(row-1,col-2,level+1)) return true;
-          clearLevels(level);
+          }
         }
       }
     }
