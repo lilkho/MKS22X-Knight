@@ -23,25 +23,21 @@ public class KnightBoard {
   }
   private boolean solveH(int row ,int col, int level)  {
     if (level==board.length*board[0].length) return true;
-    for (int i=0;i<board.length;i++) {
-      for (int j=0;j<board[i].length;j++) {
-        int[] moves = {2,1,2,-1,-2,1,-2,-1,1,2,1,-2,-1,2,-1,-2};
-        for (int k=0;k<moves.length;k+=2) {
-          System.out.println(Text.go(1,1));
-          System.out.println(this);Text.wait(50); //adjust this delay
-          if (row+moves[k]>=0 && row+moves[k]<board.length
-          && col+moves[k+1]>=0 && col+moves[k+1]<board[0].length) {
-            if (board[row][col]==0) {
-              board[row][col]=level;
-            }
-            level++;
-            if (solveH(row+moves[k],col+moves[k+1],level)) {
-              return true;
-            }
-            board[row+moves[k]][col+moves[k]]=0;
-            level--;
+    int[] moves = {2,1,2,-1,-2,1,-2,-1,1,2,1,-2,-1,2,-1,-2};
+    for (int k=0;k<moves.length;k+=2) {
+      System.out.println(Text.go(1,1));
+      System.out.println(this);Text.wait(50); //adjust this delay
+      if (row+moves[k]>=0 && row+moves[k]<board.length
+        && col+moves[k+1]>=0 && col+moves[k+1]<board[0].length) {
+          if (board[row][col]==0) {
+            board[row][col]=level;
           }
-        }
+          level++;
+          if (solveH(row+moves[k],col+moves[k+1],level)) {
+            return true;
+          }
+          board[row+moves[k]][col+moves[k]]=0;
+          level--;
       }
     }
     return false;
